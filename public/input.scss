@@ -1,0 +1,16 @@
+.timer {
+    span {
+        font-size: 3em;
+    }
+
+    :hover {
+        color: green;
+    }
+}
+
+button {
+    background-color: white;
+    border: none;
+    border: solid 1px grey;
+    border-radius: 25px;
+}

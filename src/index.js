@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { startTimer } from './timer'
 
 const App = () => {
-    let text = "Hello world!"
+    const [seconds, setSeconds] = useState('00')
+    const [minutes, setMinutes] = useState('00')
+    const [loop, setLoop] = useState(0)
+
+    function startPomodoro() {
+        console.log("Starting pomodoro...")
+        
+        startTimer(1, setSeconds, setMinutes, false)
+            .then(() => startTimer(1, setSeconds, setMinutes, true))
+    }
 
     return (
         <div className="app">
-            <p>{text}</p>
+            <div className='timer'>
+                <span className='min'>{minutes}</span><span>:</span><span className='sec'>{seconds}</span>
+            </div>
+            
+            <button onClick={() => { startPomodoro() }}>Start</button>
         </div>
     )
 }
