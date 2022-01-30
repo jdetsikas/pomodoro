@@ -1,19 +1,21 @@
-export function startTimer(minutes, setSeconds, setMinutes, takeBreak=false) {
+export function startTimer(minutes, setSeconds, setMinutes, setStatus, phase) {
+    setStatus(phase)
     setMinutes('00')
     setSeconds('00')
+    
     let timeLeft = minutes
     let elapsedSec = 0
     let elapsedMin = 0
 
-    if (takeBreak) {
-        window.alert("Your break starts now")
-    } else {
-        window.alert("Get to work!")
-    }
+    let bar = document.getElementById('bar')
+    let barWidth = 0
+    let percentage = 100 / (minutes * 60)
 
     return new Promise(resolve => {
         let timer = setInterval( () => {
             elapsedSec++
+            barWidth+= percentage
+            bar.style.width = barWidth + "%"
 
             if (elapsedSec % 60 === 0) {
                 elapsedMin++

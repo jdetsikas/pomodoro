@@ -1,16 +1,73 @@
-.timer {
-    span {
-        font-size: 3em;
-    }
+* {
+    margin: 0px;
+}
 
-    :hover {
-        color: green;
-    }
+#app {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    
+    font-size: 2em;
+    background: url(assets/images/office.jpg) no-repeat;
+    background-size: cover;
 }
 
 button {
-    background-color: white;
     border: none;
-    border: solid 1px grey;
-    border-radius: 25px;
+    border-radius: 20px;
+    
+    width: 250px;
+    font-size: 30px;
+    padding: 20px;
+}    
+
+.pomo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 90%;
+
+    background-color: rgb(255, 255, 255, 0.25);
+
+    .clock {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 550px;
+        height: 325px;
+        margin: 20px;
+
+        border: none;
+        border-radius: 20px;
+    }
+
+    .timer {
+        margin: 20px;
+
+        span {
+            font-size: 4em;
+        }
+    }
+}
+
+.progress {
+    width: 550px;
+    position: float;
+
+    border: solid 3px black;
+    border-radius: 5px;
+
+    #bar {
+        width: 0%;
+        height: 30px;
+        background-image: linear-gradient(rgb(255, 185, 94), rgb(243, 110, 2), rgb(158, 90, 0));
+    }
 }

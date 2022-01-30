@@ -1,26 +1,40 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { startTimer } from './timer'
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import { startLoop } from './pomodoro_loop'
 
 const App = () => {
     const [seconds, setSeconds] = useState('00')
     const [minutes, setMinutes] = useState('00')
-    const [loop, setLoop] = useState(0)
+    const [pomodoro, setPomodoro] = useState(0)
+    const [status, setStatus] = useState('Preparing')
 
-    function startPomodoro() {
+    async function startPomodoro() {
         console.log("Starting pomodoro...")
+        let bt = document.getElementById('start')
+        bt.disabled = true;
         
-        startTimer(1, setSeconds, setMinutes, false)
-            .then(() => startTimer(1, setSeconds, setMinutes, true))
+        startLoop(4, setSeconds, setMinutes, setStatus, setPomodoro)
+            .then(() => {
+                window.alert('Pomodoro Complete!')
+                setStatus('Preparing...')
+                bt.disabled = false;
+            })
     }
 
     return (
-        <div className="app">
-            <div className='timer'>
-                <span className='min'>{minutes}</span><span>:</span><span className='sec'>{seconds}</span>
+        <div className={`pomo ${status === 'Working...' ? 'working' : ''} ${status === 'Resting...' ? 'resting' : ''}`}>
+            <div className='clock'>
+                <p>Status: {status}</p>
+                <p>Pomodoro: {pomodoro}</p>
+                <div className='timer'>
+                    <span className='min'>{minutes}:{seconds}</span>
+                </div>
+                <div className='progress'>
+                    <div id='bar'/>
+                </div>
             </div>
             
-            <button onClick={() => { startPomodoro() }}>Start</button>
+            <button id='start' onClick={() => { startPomodoro() }}>Start</button>
         </div>
     )
 }
